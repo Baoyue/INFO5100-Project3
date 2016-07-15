@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CS5100 Project3 -- Airbnb, Belong Anywhere</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">	
+	<link type="text/css" rel="stylesheet" href="https://fast.fonts.net/cssapi/c1ece602-4b8f-4767-a71f-aa828be38869.css">
+	<link type="text/css" rel="stylesheet" href="dist/jquery.nstSlider.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+	<script src="//d3js.org/d3.v3.min.js"></script>
+	<script src="//d3js.org/topojson.v1.min.js"></script>
+
+    <script src="jquery-1.11.0.min.js"></script>
+    <script src="dist/jquery.nstSlider.min.js"></script>
+	
+
+</head>
+<body>
+	<div class="container">
+		<div class="row" id="spot">
+			<div class="col-sm-12">
+				<h1 class="title">Airbnb, Belong Anywhere</h1>
+			</div>
+		</div>
+	
+		<div class="row">
+			<div class="col-sm-6">
+				<h2 class="title">Overview</h2>
+				<p class="explain">Founded in August 2008, Airbnb is touted as one of the next-generation multibillion-dollar startup, and boasts of a peer-to-peer business model that breaks traditional norms. Airbnb encourages hosts to build their online profile and promote their hosting philosophies. Guests choose their accommodation based on published reviews, and are encouraged to leave a review themselves. Such reviews build validity and references, both for the guests and the hosts, and form the basis of a cyclic and self-sustaining strategic business model</p>
+				<br>
+			</div>
+			<div class="col-sm-6">
+				<h2 class="title" style="text-indent: 0">Step 1: Hosts' Standards</h2>
+				<p>Use the sliders to adjust the hosts’ standards scale - <span>number of reviews</span> received by a host, the <span>review score</span> and the <span>price</span> range of the rental listings. With the <span>“Current Hosts (Number)”</span> selected, the bar graph shows the number of hosts that satisfy these standards. The <span>“Current Hosts (Percentage)”</span> option, on the other hand, shows the % of the total number of hosts that satisfy these considitions</p>
+				<p><span>Click</span> on a bar to view details in any given city</p>
+
+			</div>
+		</div>
+		<div class="row">
+			<!-- left slider section-->
+			<div class="col-sm-6">
+				<!-- bottons -->
+				<div class="row">
+					<div class="col-sm-12">
+						<button id="current_value" type="button" class='btn btn-danger'>Current Hosts (Number)</button>
+						<button id="total_percentage" type="button" class='btn btn-danger'>Current Hosts (Percentage)</button>
+					</div>
+
+				</div>
+				<br>
+				<!-- sliders -->
+				<div class="row">
+					<div class="col-sm-12">
+						<!-- slider1 -->
+					    <div class="label">REVIEW NUMBER</div>
+					    <div class="sliderSection">
+					    		
+					    		<div id="review_number" class="nstSlider" 
+					        data-range_min="0" data-range_max="200"   
+					        data-cur_min="0"  data-cur_max="200">  
+							        <div class="bar"></div>                   
+							        <div class="leftGrip"></div>              
+							        <div class="rightGrip"></div>         
+					    		</div> 
+					    		<div class="textBox">
+					    			<div class="textLeft">0</div>
+					    			<div class="textRight">200+</div>
+					    			<div class="clear"></div>
+					    			<div id="review_number_left" class="leftLabel"></div> 
+					    			<div id="review_number_right" class="rightLabel"></div>
+					    			<br>
+					    		</div>  
+
+					    		<div class="clear"></div>
+					    		
+					    </div>
+
+						<!-- slider2 -->
+					    <div class="label">REVIEW SCORE</div>
+					    <div class="sliderSection">
+					    	
+					    	<div id="review_score" class="nstSlider" 
+					        data-range_min="0" data-range_max="100"   
+					        data-cur_min="0"  data-cur_max="100">  
+						        <div class="bar"></div>                   
+						        <div class="leftGrip"></div>              
+						        <div class="rightGrip"></div>             
+					    	</div>
+					    	<div class="textBox">
+				    			<div class="textLeft">0</div>
+				    			<div class="textRight">100+</div>
+				    			<div class="clear"></div>
+						    	<div id="review_score_left" class="leftLabel"></div>
+						    	<div id="review_score_right" class="rightLabel"></div>
+					    	</div> 
+					    	<div class="clear"></div>
+
+					    </div>
+					    
+					  <!-- slider3 -->
+					    <div class="label">PRICE</div>
+					    <div class="sliderSection">
+					    	<div id="price" class="nstSlider" 
+					        data-range_min="0" data-range_max="1500"   
+					        data-cur_min="0"  data-cur_max="1500">  
+						        <div class="bar"></div>                   
+						        <div class="leftGrip"></div>              
+						        <div class="rightGrip"></div>             
+					    	</div>
+					    	<div class="textBox">
+				    			<div class="textLeft">0</div>
+				    			<div class="textRight">1500+</div>
+				    			<div class="clear"></div>
+				    			<div id="price_left" class="leftLabel"></div>
+				    			<div id="price_right" class="rightLabel"></div>
+					    	</div> 
+					    	<div class="clear"></div>
+					    </div>
+					</div>
+				</div>
+			</div>
+			<br><br>
+			<!-- right bar chart-->	
+			<div class="col-sm-6">
+				<div class="row">
+					<div class="col-sm-12">
+						<svg class="lable"></svg>
+						<svg class="chart" id = "bars"></svg>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="stepTwo">
+			<div class="col-sm-12">
+				<h2 class="title">Step 2: Your Home Everywhere</h2>
+				<p class="explain">Our second visualization shows the <span>percentage distribution of the types of properties</span> available in each city, the <span> percentage distribution of the types of rooms</span> available in each of these properties, and the <span>number of hosts</span> that registered with Airbnb from the days of its inception until 2016</p>
+				<p class="explain"><span>Hover</span> over a slice of the pie chart to view the distribution on a comparative scale, and <span>click</span> to drill down further, into the distribution chart</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<div id="pieChart1">
+					<h3 id="pieTitle1" class="title"></h3>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div id="pieChart2">
+					<h3 id="pieTitle2" class="title"></h3>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div id="pieChart3">
+					<h3 id="pieTitle3" class="title"></h3>
+				</div>
+			</div>
+		</div>
+		<div  id="stepThree">
+		<div class="row">
+			<div class="col-sm-12">
+				<br>
+				<h2 class="title">Step 3: Thriving Business Model That Feeds Itself</h2>
+				<p class="explain">The third of our visualizations shows the <span>rental</span> and <span>host distributions</span> as a function of the <span>number of reviews</span> per month Vs the <span>prices</span> per day ($)</p>
+				<br>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div id="spotChart">
+					<h2 id="spotTitle"></h2>
+					<h2 id="alert"></h2>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+		<script>
+		// global 
+		var threshold = [];
+		var mode = 0;
+		var w = window,
+    		d = document,
+    		e = d.documentElement;
+    	var resizeTimer;
+    	var currentCity;
+    	var currentLabel;
+    	var currentPie;
+    	var spotResize =false;
+    	var pieResize=false;
+    	var spotWidth=$("#spot").width();
+
+    	var pieWidth=$("#pieChart1").width();
+    	$("#stepTwo").hide();
+    	$("#stepThree").hide();
+    	$("#alert").hide();
+
+		// check resize
+		d3.select(window).on("resize", function(e) {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(sizeChange, 250);
+
+		});
+
+		function sizeChange() {
+			
+			barWidth = $("#bars").width();
+			spotWidth=$("#spot").width();
+			pieWidth=$("#pieChart1").width();
+			updateData(false);
+		}
+
+		
+
+		datasets = ["Dataset/Boston_listings.csv","Dataset/DC_listings.csv","Dataset/Seattle_listings.csv","Dataset/Chicago_listings.csv","Dataset/Austin_listings.csv","Dataset/SF_listings.csv","Dataset/LA_listings.csv","Dataset/NYC_listings.csv"];
+			city = ["Boston", "DC", "Seattle", "Chicago", "Austin", "SF", "LA", "NYC"];
+	    cityName = ["Boston", "Washington DC", "Seattle", "Chicago", "Austin", "San Francisco", "Los Angeles", "New York City"];
+	    var total = [2095,2893,3191,4141,3768,5688,16087,25066];
+	    var numberFormat = d3.format(".3r");
+	    var austin, boston, chicago, dc, la, nyc, seattle, sf;
+	    var parameterArray = [0,200,0,100,0,1500];
+	    var minData, maxData;
+	    var xScale, opacityScale;
+	    var xScalePercentage;
+
+	    var barHeight = 40;
+	    var barWidth = $("#bars").width();
+	    
+	    var chart = d3.select(".chart")
+	        .attr("height", barHeight * 8);
+	    var lable = d3.select(".lable")
+	        .attr("height", barHeight * 8);
+	    var tooltip = d3.select("body")
+	        .append("div")
+	        .style("position", "absolute")
+	        .style("z-index", "10")
+	        .style("margin", "0")
+	        .style("visibility", "hidden");
+	    var colorScale = d3.scale.linear().domain([0, 1, 2, 3, 4, 5, 6, 7]).range(['#c7e9b4','#7fcdbb','#41b6c4','#1d91c0','#225ea8','#253494','#060E6D','#081d58']);
+	    var opacityScale = d3.scale.linear().domain([0,1]).range([1, 0.2]);
+	    var result = [];
+	    var datas = [];
+	    var example = [0,300,0,100,0,10000]
+
+	    // Buttons
+	    var button1 = d3.select("#current_value").on("click", function() {
+	    	mode=0;
+	      	updateList(parameterArray);
+	      
+	    });
+	    var button2 = d3.select("#total_percentage").on("click", function() {
+	    	mode=1;
+	    	updateListPercentage(parameterArray);
+	    });
+
+
+
+	    updateData(true);
+	    drawLable();
+	    $('#review_number_left').text("Lowest Number: "+0);
+	    $('#review_number_right').text("Highest Number: "+200);
+	    $('#review_number').nstSlider({
+	                "left_grip_selector": ".leftGrip",
+	                "right_grip_selector": ".rightGrip",
+	                "value_bar_selector": ".bar",
+	                "user_mouseup_callback": function(leftValue, rightValue) {
+	                    $('#review_number_left').text("Lowest Number: "+leftValue);
+	                    $('#review_number_right').text("Highest Number: "+rightValue);
+	                    if (parameterArray[0]!=leftValue) {
+	                        parameterArray[0]=leftValue;
+	                        updateData(false);
+	                    }
+	                    if (parameterArray[1]!=rightValue) {
+	                        parameterArray[1]=rightValue;
+	                        updateData(false);
+	                    }
+	                    
+	                },
+	            });
+	    $('#review_score_left').text("Lowest Score: "+0);
+	    $('#review_score_right').text("Highest Score: "+100);
+	    $('#review_score').nstSlider({
+	                "left_grip_selector": ".leftGrip",
+	                "right_grip_selector": ".rightGrip",
+	                "value_bar_selector": ".bar",
+	                "user_mouseup_callback": function(leftValue, rightValue) {
+	                    $('#review_score_left').text("Lowest Score: "+leftValue);
+	                    $('#review_score_right').text("Highest Score: "+rightValue);
+	                    if (parameterArray[2]!=leftValue) {
+	                        parameterArray[2]=leftValue;
+	                        updateData(false);
+	                    }
+	                    if (parameterArray[3]!=rightValue) {
+	                        parameterArray[3]=rightValue;
+	                        updateData(false);
+	                    }
+	                },
+	            });
+	    $('#price_left').text("Lowest Price: "+0);
+	    $('#price_right').text("Highest Price: "+1500);
+	    $('#price').nstSlider({
+	                "left_grip_selector": ".leftGrip",
+	                "right_grip_selector": ".rightGrip",
+	                "value_bar_selector": ".bar",
+	                "user_mouseup_callback": function(leftValue, rightValue) {
+	                    $('#price_left').text("Lowest Price: "+leftValue);
+	                    $('#price_right').text("Highest Price: "+rightValue);
+	                    if (parameterArray[4]!=leftValue) {
+	                        parameterArray[4]=leftValue;
+	                        updateData(false);
+	                    }
+	                    if (parameterArray[5]!=rightValue) {
+	                        parameterArray[5]=rightValue;
+	                        updateData(false);
+	                    }
+	                },
+	            });
+	    function updateData(initial) {
+	        datas = [];
+	        d3.csv(datasets[0], function(dataset0) {
+	            datas.push(dataset0);
+	            d3.csv(datasets[1], function(dataset1) {
+	                datas.push(dataset1);
+	                d3.csv(datasets[2], function(dataset2){
+	                    datas.push(dataset2);
+	                    d3.csv(datasets[3], function(dataset3){
+	                        datas.push(dataset3);
+	                        d3.csv(datasets[4], function(dataset4){
+	                            datas.push(dataset4);
+	                            d3.csv(datasets[5], function(dataset5){
+	                                datas.push(dataset5);
+	                                d3.csv(datasets[6], function(dataset6){
+	                                    datas.push(dataset6);
+	                                    d3.csv(datasets[7], function(dataset7){
+	                                        datas.push(dataset7);
+	                                        boston = dataset0;
+	                                        dc = dataset1;
+	                                        seattle = dataset2;
+	                                        chicago = dataset3;
+	                                        austin = dataset4;
+	                                        sf = dataset5;
+	                                        la = dataset6;
+	                                        nyc = dataset7;
+
+	                                        if (pieResize) {
+												var file = "Dataset/"+currentCity+"_listings.csv";
+											  	d3.csv(file, function (error, data){
+											  		if (error) {
+											  			console.log(error);
+											  		}
+											  		pieData(data);
+											  	})
+											}
+
+											if (spotResize) {
+
+												var file = "Dataset/"+currentCity+"_listings.csv";
+											  	d3.csv(file, function (error, data){
+											  		if (error) {
+											  			console.log(error);
+											  		}
+											  		if (currentPie == "#pieChart1") {
+										    		spotData(filterRoomType(currentLabel, data));
+											    	} else if (currentPie == "#pieChart2") {
+	
+											    		spotData(filterPropertyType(currentLabel, data));
+											    	} else if (currentPie == "#pieChart3"){
+											    		spotData(filterYear(currentLabel, data));
+											    	}
+	  		
+	  											})
+												
+                                            }
+
+	                                        if (initial) {
+	                                            updateScale(datas, parameterArray);
+	                                            createList(parameterArray);
+	                                            
+	                                        } else {
+	                                            updateScale(datas, parameterArray);
+	                                            if (mode) {
+	                                            	updateListPercentage(parameterArray);
+	                                            } else {
+	                                            	updateList(parameterArray);
+	                                            }
+	                                        }
+	                                    });
+	                                });
+	                            });
+	                        });
+	                    });
+	                });
+	            });
+	        });
+	    }
+
+	    function updateScale(data, parameterArray) {
+	        var reviewNumL = parameterArray[0];
+	        var reviewNumH = parameterArray[1];
+	        var reviewScoreL = parameterArray[2];
+	        var reviewScoreH = parameterArray[3];
+	        var priceL = parameterArray[4];
+	        var priceH = parameterArray[5];
+	        var x = [];
+	        var count = 0;
+	        var private_room = 0, entire_room = 0, shared_room = 0, others = 0;
+	        result = [];
+	        if (reviewNumH == 200) {
+	            reviewNumH = 1000;
+	        }
+	        if (reviewScoreH == 100) {
+	            reviewScoreH = 200;
+	        }
+	        if (price == 1500) {
+	            price = 10000;
+	        }
+	        datas.forEach(function(data,i) {
+	            count = 0, private_room = 0, entire_room = 0, shared_room = 0, others = 0;
+	            data.forEach(function(h) {
+	                if (h["review_scores_rating"] == "") 
+	                    h["review_scores_rating"] = 0;
+	                var priceArray = h["price"].substr(1).split(",");
+					var price=0;
+					for (var i = 0; i < priceArray.length; i++) {
+						price += priceArray[i];
+					}
+					price = parseInt(price);
+	                if (parseInt(h["number_of_reviews"])>=reviewNumL && parseInt(h["number_of_reviews"])<=reviewNumH 
+	                    && parseInt(h["review_scores_rating"])>=reviewScoreL && parseInt(h["review_scores_rating"])<=reviewScoreH && price>=priceL && price<=priceH) 
+	                {
+	                    count++;
+	                    if (h["room_type"] == "Private room") {
+	                        private_room++;
+	                    } else if (h["room_type"] == "Entire home/apt") {
+	                        entire_room++;
+	                    } else if (h["room_type"] == "Shared room") {
+	                        shared_room++;
+	                    } else {
+	                        others++;
+	                    }
+	                }
+	            }); 
+	            result.push({r0:city[i], r1:count, r2:private_room, r3:entire_room, r4:shared_room, r5:others});
+	            x.push(count);
+	        });
+	        minData = d3.min(x);
+	        maxData = d3.max(x);
+	        xScalePercentage = d3.scale.linear().domain([0, 100]).range([0, barWidth]);
+	        xScale = d3.scale.linear().domain([0, maxData]).range([0, barWidth]);
+	    }
+
+	    function drawLable() {
+	        cityName.forEach(function(r,i) {
+	            lable.append("text")
+	                .attr("x", 90)
+	                .attr("y", barHeight * (i)+barHeight/2)
+	                .style("alignment-baseline", "central")
+	               
+	             	.attr("text-anchor", "end")
+	                .text(cityName[i]);
+	        })
+	    }
+	    
+	    function createList(parameterArray) {
+	        chart.selectAll("rect").remove();
+	        chart.selectAll("text").remove();
+	        if (mode) {
+	        	result.forEach(function(r,i) {
+	            chart.append("rect")
+	                .attr("rx", 5)
+	                .attr("ry", 5)
+	                .attr("x", 0)
+	                .attr("y", barHeight * i) 
+	                .attr("width", xScalePercentage(r.r1*100/total[i]))
+	                .attr("height", barHeight - 10)
+	                .attr("fill", "red")
+	                .style("opacity", (i+1)/10)
+	                .style("cursor", "pointer")
+	                .on("click", function() {
+	                	pieResize = true;
+	                	var file = "Dataset/"+r.r0+"_listings.csv";
+	                	currentCity=r.r0;
+	                	$("#stepTwo").show();
+	                	$("#stepThree").hide();
+					  	d3.csv(file, function (error, data){
+					  		if (error) {
+					  			console.log(error);
+					  		}
+					  		pieData(data);
+					  	})
+				    });
+
+				    chart.append("text")
+	                .attr("x", 0)
+	                .attr("y", barHeight * i + barHeight/2) 
+	                .attr("class", "value")
+	                .attr("transform", "translate(10,0)")
+	                .style("fill", "#000")
+	                .style("cursor", "pointer")
+	                .text(numberFormat(d.r1*100/total[i])+"%")
+	                .on("click", function() {
+	                	pieResize=true;
+	                	var file = "Dataset/"+r.r0+"_listings.csv";
+	                	currentCity=r.r0;
+	                	$("#stepTwo").show();
+	                	$("#stepThree").hide();
+					  	d3.csv(file, function (error, data){
+					  		if (error) {
+					  			console.log(error);
+					  		}
+					  		pieData(data);
+					  	})
+				    });
+	            });
+	        }
+
+	        result.forEach(function(r,i) {
+	            chart.append("rect")
+	                .attr("rx", 5)
+	                .attr("ry", 5)
+	                .attr("x", 0)
+	                .attr("y", barHeight * i) 
+	                .attr("width", xScale(r.r1))
+	                .attr("height", barHeight - 10)
+	                .attr("fill", "red")
+	                .style("opacity", (i+1)/10)
+	                .style("cursor", "pointer")
+	                .on("click", function() {
+	                	pieResize=true;
+	                	var file = "Dataset/"+r.r0+"_listings.csv";
+	                	currentCity=r.r0;
+	                	$("#stepTwo").show();
+	                	$("#stepThree").hide();
+					  	d3.csv(file, function (error, data){
+					  		if (error) {
+					  			console.log(error);
+					  		}
+					  		pieData(data);
+					  	})
+				    });
+
+				    chart.append("text")
+	                .attr("x", 0)
+	                .attr("y", barHeight * i + barHeight/2) 
+	                .attr("class", "value")
+	                .attr("transform", "translate(10,0)")
+	                .style("fill", "#000")
+	                .style("cursor", "pointer")
+	                .text(r.r1)
+	                .on("click", function() {
+	                	pieResize=true;
+	                	var file = "Dataset/"+r.r0+"_listings.csv";
+	                	currentCity=r.r0;
+	                	$("#stepTwo").show();
+	                	$("#stepThree").hide();
+					  	d3.csv(file, function (error, data){
+					  		if (error) {
+					  			console.log(error);
+					  		}
+					  		pieData(data);
+					  	})
+				    });
+	            });
+	    }
+
+	    function updateList(parameterArray) {
+	        chart.selectAll("rect")
+	        .data(result)
+	        .transition()    // <-- This is new! Everything else here is unchanged.
+	        .attr("width", function(r) {
+	            return xScale(r.r1);
+	        });
+	        chart.selectAll(".value")
+	        .data(result)
+          .text(function(d) {
+              return d.r1;
+          });
+	    }
+
+	    function updateListPercentage(parameterArray) {
+	    	chart.selectAll("rect")
+	        .data(result)
+	        .transition()    // <-- This is new! Everything else here is unchanged.
+	        .attr("width", function(r,i) {
+	        	
+	            return xScalePercentage(r.r1*100/total[i]);
+	        });
+	      chart.selectAll(".value")
+	        .data(result)
+          .text(function(d,i) {
+              return numberFormat(d.r1*100/total[i])+"%";
+          });
+	    }
+
+
+		// clean data for pie charts
+		function pieData(data) {
+	  		var private = 0;
+	  		var entire = 0;
+	  		var shared = 0;
+
+	  		var apartment=0;
+	  		var house=0;
+	  		var loft=0;
+	  		var townhouse=0;
+	  		var otherType=0;
+
+	  		var year2008=0;
+	  		var year2009=0;
+	  		var year2010=0;
+	  		var year2011=0;
+	  		var year2012=0;
+	  		var year2013=0;
+	  		var year2014=0;
+	  		var year2015=0;
+	  		var year2016=0;
+	  		data.forEach(function(d) {
+	  			switch (d["room_type"]) {
+	  				case "Private room": 
+	  						private++;
+			    			break;
+			    	case "Entire home/apt": 
+			    			entire++;
+			    			break;
+			    	case "Shared room": 
+			    			shared++;
+			    			break;
+	  			}
+
+	  			switch (d["property_type"]) {
+	  				case "Apartment": 
+	  						apartment++;
+			    			break;
+			    	case "House": 
+			    			house++;
+			    			break;
+			    	case "Loft":
+			    			loft++;
+			    			break;
+			    	case "Townhouse": 
+			    			shared++;
+			    			break;
+			    	default:
+			    			otherType++;
+	  			}
+
+	  			var year = parseInt(d["host_since"].split("/")[2]);
+	  			switch (year) {
+	  				case 08:
+	  						year2008++;
+	  						break;
+	  				case 09: 
+	  						year2009++;
+			    			break;
+			    	case 10: 
+			    			year2010++;
+			    			break;
+			    	case 11: 
+			    			year2011++;
+			    			break;
+			    	case 12: 
+	  						year2012++;
+			    			break;
+			    	case 13: 
+			    			year2013++;
+			    			break;
+			    	case 14: 
+			    			year2014++;
+			    			break;
+			    	case 15: 
+	  						year2015++;
+			    			break;
+			    	case 16:
+			    			year2016++;
+	  			}
+	  		})
+
+	  		var totalRoom = private + entire + shared;
+			
+			var roomArray=[
+				{label:'Private Room', num: private, percentage: private/totalRoom }
+				,{label:'Entire Home/Apt', num: entire, percentage: entire/totalRoom}
+				,{label:'Shared Room', num: shared, percentage: shared/totalRoom}
+			];
+
+			var totalProperty = apartment + house + loft + townhouse + otherType;
+			
+			var propertyArray=[
+				{label:'Apartment', num: apartment, percentage: apartment/totalProperty }
+				,{label:'House', num: house, percentage: house/totalProperty}
+				,{label:'Loft', num: loft, percentage: loft/totalProperty}
+				,{label:'Townhouse', num: townhouse, percentage: townhouse/totalProperty}
+				,{label:'Other Type', num: otherType, percentage: otherType/totalProperty}
+			];
+
+			var totalStart = year2008+year2009+year2010+year2011+year2012+year2013+year2014+year2015+year2016;
+
+			var startArray=[
+				{label:'Year 2008', num: year2008, percentage: year2008/totalStart }
+				,{label:'Year 2009', num: year2009, percentage: year2009/totalStart }
+				,{label:'Year 2010', num: year2010, percentage: year2010/totalStart }
+				,{label:'Year 2011', num: year2011, percentage: year2011/totalStart }
+				,{label:'Year 2012', num: year2012, percentage: year2012/totalStart }
+				,{label:'Year 2013', num: year2013, percentage: year2013/totalStart }
+				,{label:'Year 2014', num: year2014, percentage: year2014/totalStart }
+				,{label:'Year 2015', num: year2015, percentage: year2015/totalStart }
+				,{label:'Year 2016', num: year2016, percentage: year2016/totalStart }
+			];
+			// draw pies
+			document.getElementById("pieTitle1").innerHTML="Room Type Percentage";
+			document.getElementById("pieTitle2").innerHTML="Property Type Percentage";
+			document.getElementById("pieTitle3").innerHTML="Host Registration Percentage";
+			drawPie("#pieChart1", roomArray, data);
+			drawPie("#pieChart2", propertyArray, data);
+			drawPie("#pieChart3", startArray, data);
+		}
+
+		// draw pies
+		function drawPie (id, array, data) {
+			d3.selectAll(id+" svg").remove();
+
+			var w = pieWidth * 0.8;
+			var h = pieWidth * 0.8;
+			var r = h/2;
+			//var color = ["#D95F5F", "#FBA055", "#A64066", "#876587", "#5F86A3","#FCD670", "#F1A581","#D3C996", "#CC7F82"];
+			var color = ["#CD362F", "#FFD464", "#EC6697", "#F17D80", "#FBA055", "#67A7AC", "#C2D2AE", "#6C8672","#74AAF7"];
+			
+			var vis = d3.select(id).append("svg:svg").data([array]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
+
+			var pie = d3.layout.pie().value(function(d){return d.num;});
+
+			// declare an arc generator function
+			var arc = d3.svg.arc().innerRadius(r*0.6).outerRadius(r);
+
+			// select paths, use arc generator to draw
+			var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+
+			arcs.append("svg:path")
+			    .attr("fill", function(d, i){
+			        return color[i];
+			    })
+			    .attr("d", function (d) {
+			        return arc(d);
+			    })
+			    .attr("stroke", "#EEE")
+			    .attr("stroke-width", "2px")
+			    .on("mouseover", function (d){
+			    	d3.select(this).style("opacity", 0.8);
+				    arcs.selectAll("text").remove();
+				    arcs.append("text")
+					  .attr("dy", "0")
+					  .style("text-anchor", "middle")
+					  .style("stroke", "#CD362F")
+					  .attr("class", "inside")
+
+					  .text(d.data.label);
+					arcs.append("text")
+					  .attr("dy", "2em")
+					  .style("text-anchor", "middle")
+					  .attr("class", "data")
+					  .text(d.data.num + " / "+ Number(d.data.percentage*100).toFixed(0)+"%");
+			    })
+			    .on("mouseout", function(d) {
+			    	d3.select(this).style("opacity", 1.0);
+			    	 arcs.selectAll("text").remove();
+			    })
+			    .on("click", function(d) {
+
+			    	// when click, should spots chart
+			    	$("#stepThree").show();
+			    	spotResize = true;
+			    	var label = d.data.label;
+			    	currentLabel = d.data.label;
+			    	currentPie = id;
+			    	var message;
+					switch (currentCity) {
+						case "DC":
+							message="Washington DC";
+							break;
+						case "SF":
+							message="San Francisco";
+							break;
+						case "LA":
+							message="Los Angeles";
+							break;
+						case "NYC":
+							message="New York City";
+							break;
+						default:
+							message=currentCity;
+					}
+					document.getElementById("spotTitle").innerHTML=label+ " in " + message;
+			    	if (id == "#pieChart1") {
+			    		spotData(filterRoomType(label, data));
+			    	} else if (id == "#pieChart2") {
+			    		spotData(filterPropertyType(label, data));
+			    	} else {
+			    		spotData(filterYear(label, data));
+			    	}
+			    });
+
+		}
+
+		// filter room type
+		function filterRoomType(label, data) {
+			var result = [];
+			data.forEach(function(d) {
+
+				switch (label) {
+					case "Private Room":
+						label = "Private room";
+						break;
+					case "Entire Home/Apt":
+						label = "Entire home/apt";
+						break;
+					case "Shared Room":
+						label = "Shared room";
+						break;
+				}
+				if (d["room_type"] == label && (d["review_scores_rating"] != "" || isNaN(d["review_scores_rating"]))) {
+					result.push(d);
+				}
+			})
+
+			return result;
+		}
+
+		// filter property type
+		function filterPropertyType(label, data) {
+			
+			var result = [];
+			data.forEach(function(d) {
+				if (d["review_scores_rating"] != "" || isNaN(d["review_scores_rating"])) {
+					if (label != "Other Type" && d["property_type"] == label) {
+						result.push(d);
+					}
+					if (label == "Other Type") {
+						if (d["property_type"] != "Apartment" && 
+							d["property_type"] != "House" && 
+							d["property_type"] != "Townhouse" && 
+							d["property_type"] != "Loft") {
+							result.push(d);
+						}
+					}
+				}
+			})
+			return result;
+		}
+
+		// filter year
+		function filterYear(label, data) {
+			
+			var result = [];
+			data.forEach(function(d) {
+
+				if (d["review_scores_rating"] != "" || isNaN(d["review_scores_rating"])) {
+
+					switch (label) {
+						case "Year 2008":
+							label = 2008;
+							break;
+						case "Year 2009":
+							label = 2009;
+							break;
+						case "Year 2010":
+							label = 2010;
+							break;
+						case "Year 2011":
+							label = 2011;
+							break;
+						case "Year 2012":
+							label = 2012;
+							break;
+						case "Year 2013":
+							label = 2013;
+							break;
+						case "Year 2014":
+							label = 2014;
+							break;
+						case "Year 2015":
+							label = 2015;
+							break;
+						case "Year 2016":
+							label = 2016;
+							break;
+					}
+					var year = parseInt(d["host_since"].split("/")[2]);
+					switch (year) {
+		  				case 08:
+		  						year = 2008;
+		  						break;
+		  				case 09: 
+		  						year = 2009;
+				    			break;
+				    	case 10: 
+				    			year = 2010;
+				    			break;
+				    	case 11: 
+				    			year = 2011;
+				    			break;
+				    	case 12: 
+		  						year = 2012;
+				    			break;
+				    	case 13: 
+				    			year = 2013;
+				    			break;
+				    	case 14: 
+				    			year = 2014;
+				    			break;
+				    	case 15: 
+		  						year = 2015;
+				    			break;
+				    	case 16:
+				    			year = 2016;
+		  			}
+					if (year == label) {
+						result.push(d);
+					}
+				}
+			})
+			return result;
+		}
+
+		// get the threshold of axis
+		function getThreshold(data) {
+			
+			var max_price=0;
+			var min_price=100000;
+			var max_review=0.00;
+			var min_review=100000.00;
+			data.forEach(function(d){
+
+				var priceArray = d["price"].substr(1).split(",");
+				var price=0;
+				for (var i = 0; i < priceArray.length; i++) {
+					price += priceArray[i];
+				}
+				price = parseInt(price);
+
+				var num_review = parseFloat(d["reviews_per_month"]);
+				max_price=(price > max_price)?price:max_price;
+				min_price=(price < min_price)?price:min_price;
+				max_review=(num_review > max_review)?num_review:max_review;
+				min_review=(num_review < min_review)?num_review:min_review;
+			})
+
+			if (max_price==0 || min_price==100000 || max_review==0.00 || min_review== 100000) {
+				threshold = [];
+				return;
+			}
+			// reset threshold
+			threshold=[];
+			threshold.push(min_price);
+			threshold.push(max_price);
+			threshold.push(min_review);
+			threshold.push(max_review);
+		}
+
+		// draw spot chart
+		function spotData(data) {
+
+			var height = spotWidth/2;
+		    var width = spotWidth;
+		    var padding = 50;
+
+		    d3.select("#spotChart").selectAll("svg").remove();
+
+		    var svg = d3.select("#spotChart")
+		    	.append("svg")
+		        .attr("width", width)
+		        .attr("height", height)
+		    var xScaleChart, yScaleChart;
+		    var xAxis, yAxis;
+		    var gX, gY;
+
+		    // color scale
+		    var color = ['#2FA8AB','#81A860','#EBA801','#882B37'];
+		    var countScale = d3.scale.linear().domain([0, 80, 90, 100]).range(color);
+		    	getThreshold(data);
+		    if (threshold.length== 0) {
+		    	$("#alert").show();
+		    	$("#spotChart svg").hide();
+		    	$("#alert").text("No data in this region.");
+		    	return;
+		    } else {
+		    	$("#alert").hide();
+		    }
+	        var newXDomain = [threshold[0], threshold[1]];
+	        var newYDomain = [threshold[2], threshold[3]];
+
+	       	xScaleChart = d3.scale.linear().domain(newXDomain).range([padding, width - padding]);
+	        yScaleChart = d3.scale.linear().domain(newYDomain).range([height - padding, padding]);
+
+	        xAxis = d3.svg.axis().scale(xScaleChart).orient("bottom");
+	        yAxis = d3.svg.axis().scale(yScaleChart).orient("left");
+
+	        gX = svg.append("g").attr("transform", "translate(0," + (height - padding) + ")").attr("class", "axis")		
+	            .call(xAxis);
+	        gY = svg.append("g").attr("transform", "translate(" + padding + ",0)").attr("class", "axis")
+	            .call(yAxis);
+
+
+		    svg.append("g")
+	            .append("text")
+	            .attr("id", "yTitle")
+	            .attr("transform", "rotate(-90)")
+	            .attr("transform", "translate(-5, 0) rotate(-90)")
+	            .attr("x", -height / 2)
+	            .attr("y", padding / 4)
+	            .attr("dy", ".2em")
+	            .attr("class", "axis-title")
+	            .style("text-anchor", "middle")
+	            .text(
+	                "Number of Reviews Per Month"
+	            );
+
+	        svg.append("g")
+	            .append("text")
+	            .attr("id", "xTitle")
+	            .attr("x", width *0.5)
+	            .attr("y", height - padding / 4)
+	            .attr("dy", ".2em")
+	            .attr("class", "axis-title")
+	            .style("text-anchor", "middle")
+	            .text(
+	                "Price Per Day ($)"
+	            );
+
+	        var data = svg.selectAll(".data").data(data);
+
+	        data.enter().append("circle")
+            .attr("r", 5)
+            .attr("cx", function(d) {
+            	var priceArray = d["price"].substr(1).split(",");
+				var price=0;
+				for (var i = 0; i < priceArray.length; i++) {
+					price += priceArray[i];
+				}
+				price = parseInt(price);
+                return xScaleChart(price);
+            })
+            .attr("cy", function(d) {
+                if ((d["reviews_per_month"])=="" || isNaN(d["reviews_per_month"])) {
+                    return height-padding;
+                }
+                var num_review = parseFloat(d["reviews_per_month"]);
+                return yScaleChart(num_review);
+            })
+            .style("fill", function(d) {
+                if (d["review_scores_rating"] == "" || isNaN(d["review_scores_rating"])) {
+                	return "#FFF";
+                }
+                return countScale(parseInt(d["review_scores_rating"]));
+            })
+            .style("opacity", function(d) {
+            	if (d["review_scores_rating"] == "" || isNaN(d["review_scores_rating"])) {
+                	return 0.0;
+                }
+                return 0.6;
+            })
+
+            // legend
+            var gradient = svg.append("defs")
+	        .append("linearGradient")
+	        .attr("id", "gradient")
+	        .attr("x1", "0%")
+	        .attr("y1", "0%")
+	        .attr("x2", "100%")
+	        .attr("y2", "0%")
+	        .attr("spreadMethod", "pad");
+
+
+	        gradient.append("stop")
+	                .attr("offset", 0.0 + "%")
+	                .attr("stop-color", color[0])
+	                .attr("stop-opacity", 1);
+	        gradient.append("stop")
+	                .attr("offset", 80.00 + "%")
+	                .attr("stop-color", color[1])
+	                .attr("stop-opacity", 1);
+	        gradient.append("stop")
+	                .attr("offset", 90.00 + "%")
+	                .attr("stop-color", color[2])
+	                .attr("stop-opacity", 1);
+	        gradient.append("stop")
+	                .attr("offset", 100.00 + "%")
+	                .attr("stop-color", color[3])
+	                .attr("stop-opacity", 1);
+
+            svg.append("g")
+            .append("rect").attr("id", "legend")
+            .attr("x", width*0.40)
+            .attr("y", height*0.1)
+            .attr("width", width*0.5)
+            .attr("height", height*0.04)
+            .attr("rx", 10) //rounded corners, of course!
+            .attr("ry", 10)
+            .style("fill", "url(#gradient)");
+
+            svg.append("g")
+            .append("text")
+            .attr("x", width*0.40)
+            .attr("y", height*0.2)
+            .text("0");
+
+            svg.append("g")
+            .append("text")
+            .attr("x", width*0.87)
+            .attr("y", height*0.2)
+            .text("100");
+
+
+		}
+		
+
+	</script>
+</body>
+</html>

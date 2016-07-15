@@ -1,0 +1,171 @@
+body {
+  font-family: "LinotypeUniversW01-Ligh_723625"; 
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #fff;
+  height: 700px;
+  margin-top: 10px;
+}
+
+h1.title{
+  font-weight: 900;
+  text-align: center;
+  font-size: 42px;
+  color:#CD362F;
+  text-indent: 1.2em;
+}
+
+h2.title{
+  font-weight: 900;
+  font-size: 1.5em;
+  color: #CD362F;
+  padding: 10px 0;
+  text-indent: 1.3em;
+}
+
+h3.title {
+  font-weight: 900;
+  font-size: 1.5em;
+  color: #CD362F;
+  padding: 10px 0;
+  margin-left: 1.2em;
+}
+
+p.explain {
+  padding-left: 2em;
+}
+
+#alert {
+  color: #CD362F;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.inside {
+  font-weight: 500;
+  font-size: 18px;
+}
+.clear {
+  clear:both;
+}
+.axis path {
+    fill: none;
+    stroke: rgba(205, 54, 47, 0.7);
+}
+
+.axis line {
+    stroke: rgba(205, 54, 47, 0.8);
+}
+
+.axis text {
+    font-size: 12pt;
+    stroke: rgba(205, 54, 47, 0.8);
+}
+
+.axis-title {
+    font-size: 0.9em;
+    stroke: rgba(205, 54, 47, 0.8);
+}
+
+
+div.tipbox {
+    color: #222;
+    background-color: #fff;
+    padding: .5em;
+    text-shadow: #f5f5f5 0 1px 0;
+    border-radius: 1px;
+    opacity: 0.9;
+    position: absolute;
+}
+div.tipbox {
+    color: #222;
+    background-color: #fff;
+    padding: .5em;
+    text-shadow: #f5f5f5 0 1px 0;
+    border-radius: 1px;
+    opacity: 0.9;
+    position: absolute;
+}
+span {
+  color: #CD362F;
+  font-weight: 600;
+}
+.lable {
+  font-size: 15px;
+  float: left;
+  width: 30%;
+}
+.chart { 
+    /*You can put it every where*/
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    width: 70%;
+    float: left;
+}
+.label { 
+    /*You can put it every where*/
+    overflow-y: auto;
+    width: 100px;
+    height: 400px;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #CD362F;
+    margin:  0 1.5em;
+}
+.sliderSection {
+  padding-top: 10px;
+}
+.textBox {
+  margin: 5px 1.8em;
+  width: 300px;
+}
+.textLeft{
+  width: 40px;
+  height: 20px;
+  float: left;
+  display: inline;
+  padding-left: 5px;
+}
+.textRight {
+  width: 40px;
+  height: 20px;
+  float: right;
+  display: inline;
+  text-align: right;
+}
+.nstSlider {
+  margin: 0 1.8em;
+  width: 300px;
+}
+.leftLabel,.rightLabel {
+  color: #CD362F;
+  font-size: 15px;
+  font-weight: 600;
+  font-style: italic;
+  margin: 5px 0;
+  width: 140px;
+  margin:0;
+
+}
+.leftLabel {
+  float: left;
+  padding-left: 5px;
+}
+.rightLabel {
+  float: right;
+  text-align: right;
+}
+
+#current_value, #total_percentage {
+  margin: 2em;
+  margin-top:0;
+  margin-bottom: 0.3em;
+}
+
+#spotTitle {
+  color:#CD362F;
+  font-weight: 600;
+  margin: 0 auto;
+  text-align: center;
+}
