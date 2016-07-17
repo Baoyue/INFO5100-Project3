@@ -1,5 +1,6 @@
 # INFO5100 Data Visualization Project3: Airbnb Belong to Anywhere
 
+## Please click [INFO5100 Project3](https://baoyue.github.io/INFO5100Project3/index.html) to view this visualization
 ## Introduction
 
 Founded in August 2008, Airbnb, matches hosts that are looking to monetize their extra
